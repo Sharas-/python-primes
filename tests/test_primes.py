@@ -12,6 +12,12 @@ def test_primes_1_to_2():
 def test_primes_2_to_2():
 	assert [2] == list(primes.create_prime_iterator(2, 2))
 
+def test_primes_4_to_15():
+	assert [5,7,11,13] == list(primes.create_prime_iterator(4, 15))
+
+def test_primes_10_to_1():
+	assert [] == list(primes.create_prime_iterator(10, 1))
+
 def test_primes_1_to_29():
 	assert [2,3,5,7,11,13,17,19,23,29] == list(primes.create_prime_iterator(1, 29))
 
