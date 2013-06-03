@@ -108,13 +108,17 @@ def test_primes_999_to_10000():
 	9973]
 
 def test_8_is_not_prime():
-    assert primes.is_prime_except_2(8) == False
+    assert _is_prime(8)  == False
 
 def test_9349_is_prime():
-    assert primes.is_prime_except_2(9349) == True
+	assert _is_prime(9349)  == True
 
-def test_198313_is_prime_test():
-	assert primes.is_prime_except_2(198313) == True
+def test_198313_is_prime():
+	assert _is_prime(198313) == True
 
-def test_10000000_is_not_prime_test():
-	assert primes.is_prime_except_2(10000000) == False
+def test_10000000_is_not_prime():
+	assert _is_prime(10000000) == False
+
+def _is_prime(number):
+	_primes = list(primes.create_prime_iterator(number, number))
+	return _primes.count(number) > 0

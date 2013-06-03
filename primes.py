@@ -10,19 +10,19 @@ def create_prime_iterator(rfrom, rto):
     else:
         prefix = []
         odd_rfrom = make_odd(rfrom) # make rfrom an odd number so that we can skip all even nubers when searching for primes
-    primeGenerator = (num for num in xrange(odd_rfrom, rto + 1, 2) if is_prime_except_2(num)) # incrementing in xrange(...) by 2 to pass all even numbers
-    return itertools.chain(prefix, primeGenerator)
+    odd_numbers = (num for num in xrange(odd_rfrom, rto + 1, 2))
+    prime_generator = (num for num in odd_numbers if not has_odd_divisor(num))
+    return itertools.chain(prefix, prime_generator)
 
-def is_prime_except_2(num):
-    """Test a number for prime. As an optimisation, number 2 is wrongly considered not a prime by this function"""
-    if num % 2 == 0:
-        return False
+def has_odd_divisor(num):
+    """Test whether number is evenly divisable by odd divisor."""
     maxDivisor = int(math.sqrt(num))
     for divisor in xrange(3, maxDivisor + 1, 2):
         if num % divisor == 0:
-            return False
-    return True
+            return True
+    return False
 
 def make_odd(number):
+    """Make number odd by adding one to it if it was even, otherwise return it unchanged"""
     return number | 1
 
