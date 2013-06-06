@@ -4,12 +4,8 @@ import itertools
 
 def create_prime_iterator(rfrom, rto):
     """Create iterator of prime numbers in range [rfrom, rto]"""
-    if (rfrom < 3): # handling case when we need to skip 1 as not a prime and add 2 as a prime.
-        prefix = [2]
-        odd_rfrom = 3
-    else:
-        prefix = []
-        odd_rfrom = make_odd(rfrom) # make rfrom an odd number so that we can skip all even nubers when searching for primes
+    prefix = [2] if rfrom < 3 and rto > 1 else [] # include 2 if it is in range separately as it is a "weird" case of even prime
+    odd_rfrom = 3 if rfrom < 3 else make_odd(rfrom) # make rfrom an odd number so that we can skip all even nubers when searching for primes, also skip 1 as a non prime odd number.
     odd_numbers = (num for num in xrange(odd_rfrom, rto + 1, 2))
     prime_generator = (num for num in odd_numbers if not has_odd_divisor(num))
     return itertools.chain(prefix, prime_generator)

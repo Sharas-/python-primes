@@ -6,6 +6,10 @@ import primes
 
 if __name__ == '__main__': pytest.main(__file__)
 
+
+def test_primes_1_to_1():
+	assert [] == list(primes.create_prime_iterator(1, 1))
+
 def test_primes_1_to_2():
 	assert [2] == list(primes.create_prime_iterator(1, 2))
 
